@@ -1,0 +1,17 @@
+<div class="col-md-6" id="center_table">
+	<ul class="list-group">
+	  <% @systems.each do |i| %>
+	    <li class="list-group-item">
+	    	<%= i.name %>
+	    	<div class="btn-group btn-group-justified" role="group" aria-label="...">
+				  <div class="btn-group" role="group">
+				    <%= link_to "Подробнее", system_path(i), :class => "btn btn-default"%>
+				  </div>
+				  <div class="btn-group" role="group">
+				    <%=link_to "Удалить", system_path(i), :class => "btn btn-default", method: :delete, data: {confirm: "Точно удалить?"} %>
+				  </div>
+				</div>
+	    </li>
+	  <% end %>
+	</ul>
+</div>

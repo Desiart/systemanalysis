@@ -1,0 +1,6 @@
+
+<div class="col-md-3" id="center_table">
+	<%= simple_form_for @system, :html => {:multipart => true} do |f| %>
+	      <%= render partial: "form", locals: {f: f}%>
+	<%end%>
+</div>

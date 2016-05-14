@@ -1,0 +1,2 @@
+class SystemListTypesController < ApplicationController
+end

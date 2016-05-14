@@ -14,3 +14,12 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+//= require bootstrap-sprockets
+
+#sign_in_menu
+{
+  width:250% !important;
+  max-width: 300px;
+  li{
+      margin: 1em;
+ }

@@ -13,7 +13,8 @@ class SystemsController < ApplicationController
 	end
 
 	def create
-		@image = System.new
+		@system = System.create(system_params)
+		redirect_to systems_path
 	end
 
 	def edit
@@ -24,4 +25,11 @@ class SystemsController < ApplicationController
 
 	def destroy
 	end
+
+private 
+
+def system_params
+			params.require(:system).permit(:name,:description,:details)
+end
+
 end

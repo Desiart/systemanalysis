@@ -7,7 +7,14 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users, only: [:index, :show, :destroy]
 
-  resources :systems
+  resources :systems do
+    member do
+      get 'add_users_form'
+      post 'add_users'
+    end
+  end
+
+  
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,1 +1,18 @@
-<%#= @system.name %>
+<div class="col-md-6">
+<ul class="list-group">
+	Название:
+	<li class="list-group-item"><%= @system.name %></li>
+	Назначение:
+	<li class="list-group-item"><%= @system.description %></li>
+	Описание:
+	<li class="list-group-item"><%= @system.details %></li>
+</ul>
+<h4>Создатели:</h4>
+<ul class="list-group">
+  <% @users.each do |user| %>
+      <li class="list-group-item">
+        <%= h user.email -%>
+      </li>
+  <% end %>
+</ul>
+</div>

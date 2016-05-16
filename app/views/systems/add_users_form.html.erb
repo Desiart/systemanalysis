@@ -1,0 +1,19 @@
+<div class="col-md-6" >
+	<ul class="list-group">
+	<%= form_tag add_users_system_path, method: :post do %>
+	  <% @users.each do |user| %>
+	      <li class="list-group-item">
+	        <%= check_box_tag "user_ids[]", user.id -%>
+	        <%= h user.email -%>
+	      </li>
+	  <% end %>
+	 <li style="list-style:none; margin-top:1em;">
+		<%= form_tag add_users_system_path, method: :post do %>
+  		<%= submit_tag 'Применить' %>
+		<% end %>
+	 </li>
+	</ul>
+	<% end %>
+</div>
+
+

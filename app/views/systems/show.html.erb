@@ -1,18 +1,36 @@
-<div class="col-md-6">
-<ul class="list-group">
-	Название:
-	<li class="list-group-item"><%= @system.name %></li>
-	Назначение:
-	<li class="list-group-item"><%= @system.description %></li>
-	Описание:
-	<li class="list-group-item"><%= @system.details %></li>
-</ul>
-<h4>Создатели:</h4>
-<ul class="list-group">
-  <% @users.each do |user| %>
-      <li class="list-group-item">
-        <%= h user.email -%>
-      </li>
-  <% end %>
-</ul>
+<div class="col-md-6" style="margin-bot:1em;">
+	<ul class="list-group">
+		<h4 style="margin-top: 1em;">Создатель:</h4>
+		<li class="list-group-item" style="margin-top: 1em;"><%= User.find_by_id(@system.owner_id).email %></li>
+		<h4 style="margin-top: 1em;">Название:</h4>
+		<li class="list-group-item" style="margin-top: 1em;"><%= @system.name %></li>
+		<h4 style="margin-top: 1em;">Назначение:</h4>
+		<li class="list-group-item" style="margin-top: 1em;"><%= @system.description %></li>
+		<h4 style="margin-top: 1em;">Описание:</h4>
+		<li class="list-group-item" style="margin-top: 1em;"><%= @system.details %></li>
+	</ul>
+	<h5>Участники:</h5>
+	<%if @users.count > 0 %>
+		<ul class="list-group">
+		  <% @users.each do |user| %>
+		      <li class="list-group-item">
+		        <%=user.email%>
+		      </li>
+		  <% end %>
+		</ul>
+		<%if current_user.id == @system.owner_id%>
+			<%=link_to "Добавить еще", add_users_form_system_path, :class => "btn btn-default", method: :get%>
+			<%if current_user.id == @system.owner_id %>
+			<h5>Удалить участников:</h5>
+					<div class="col-md-6" >
+						<%= render partial: "destroy_users_form"%>
+					</div>
+			<% end %>
+	<% end %>
+	<% else %>
+		<p>Участников нет</p>
+		<%if current_user.id == @system.owner_id%>
+			<%=link_to "Добавить", add_users_form_system_path, :class => "btn btn-default", method: :get%>
+		<% end %>
+	<% end %>
 </div>

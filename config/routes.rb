@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     member do
       get 'add_users_form'
       post 'add_users'
+      delete 'destroy_users'
     end
   end
 

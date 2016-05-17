@@ -1,14 +1,21 @@
 class SystemsController < ApplicationController
 
 	before_filter :load_user
+	before_filter :load_system, only:[:destroy,:add_users,:add_users_form,:show,:edit,:update,:destroy_users]
+	before_filter :check_owner, only:[:edit,:update,:destroy,
+		:add_users_form,:add_users,:destroy_users]
 
 	def index
 		@systems = System.all
 	end
 
 	def show
-		@system = System.find_by_id(params[:id])
-		@users = @system.users
+		@users = []
+		@system.users.each do |user|
+			if user.id != @system.owner_id
+				@users << user
+			end
+		end
 	end
 
 	def new
@@ -17,8 +24,10 @@ class SystemsController < ApplicationController
 
 	def create
 		@system = System.create(system_params)
+		@system.owner_id = @user.id
+		@system.save
 		@user.system_lists.create(system: @system)
-		redirect_to systems_path
+		redirect_to system_path(@system)
 	end
 
 	def edit
@@ -28,19 +37,21 @@ class SystemsController < ApplicationController
 	end
 
 	def destroy
-		@system = System.find_by_id(params[:id])
 		@system.destroy
 		redirect_to systems_path
 	end
 
 	def add_users_form
-		@system = System.find_by_id(params[:id])
-		@users = User.all
-		@ids = params[:user_ids]
-	end
+		@users = []
+		User.all.each do |user|
+			if !@system.users.include?(user)
+				@users << user
+			end
+		end
+	end 
+		
 
 	def add_users
-		@system = System.find_by_id(params[:id])
 		ids = params[:user_ids]
 		ids.each do |i|
 			user = User.find_by_id(i)
@@ -48,6 +59,16 @@ class SystemsController < ApplicationController
 		end
 		redirect_to system_path(@system)
 	end
+
+	def destroy_users
+		ids = params[:user_ids]
+		ids.each do |i|
+			user = User.find_by_id(i)
+			@system.users.destroy(user)
+		end
+		redirect_to system_path(@system)
+	end
+
 
 private 
 
@@ -57,6 +78,14 @@ private
 
 	def load_user
 		@user = current_user
+	end
+
+	def load_system
+		@system = System.find_by_id(params[:id])
+	end
+
+	def check_owner
+		render_403 unless @system.owner_id == current_user.id
 	end
 
 end

@@ -1,22 +1,21 @@
 <div class="col-md-6" id="center_table">
 	<%= @user.email %>
 	<ul class="list-group">
-		
+			<h4>Системы:</h4>
 		  <% @systems.each do |i| %>
 		    <li class="list-group-item">
 		    	<%= i.name %>
-		    	<div class="btn-group btn-group-justified" role="group" aria-label="...">
+		    	<div class="btn-group btn-group-justified" role="group" aria-label="..." style="margin-top: 1em;">
 					  <div class="btn-group" role="group">
-					    <%= link_to "Профиль", system_path(i), :class => "btn btn-default"%>
+					    <%= link_to "Подробнее", system_path(i), :class => "btn btn-default"%>
 					  </div>
-					  <div class="btn-group" role="group">
-					    <%=link_to "Удалить", system_path(i), :class => "btn btn-default", method: :delete, data: {confirm: "Точно удалить?"} %>
-					  </div>
+					  <%if i.owner_id == current_user.id %>
+						  <div class="btn-group" role="group">
+						    <%=link_to "Удалить", system_path(i), :class => "btn btn-default", method: :delete, data: {confirm: "Точно удалить?"} %>
+						  </div>
+					  <%end%>
 					</div>
 		    </li>
 		  <% end %>	
 	</ul>
-	<div>
-		 <%= link_to "Создать систему", new_system_path, :class => "btn btn-default"%>
-	</div>
 </div>

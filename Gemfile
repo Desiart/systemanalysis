@@ -14,10 +14,12 @@ gem 'carrierwave'
 gem 'rmagick'
 gem 'bcrypt'
 gem 'devise'
+gem 'anjlab-bootstrap-rails', '~> 3.0.0.3', :require => 'bootstrap-rails'
 gem 'sdoc',                 '0.4.0', group: :doc
 
+
 group :development, :test do
-	
+
   gem 'sqlite3',     '1.3.9'
   gem 'byebug',      '3.4.0'
   gem 'web-console', '2.0.0.beta3'

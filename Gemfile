@@ -17,10 +17,19 @@ gem 'devise'
 gem 'sdoc',                 '0.4.0', group: :doc
 
 group :development, :test do
+	
   gem 'sqlite3',     '1.3.9'
   gem 'byebug',      '3.4.0'
   gem 'web-console', '2.0.0.beta3'
   gem 'spring',      '1.1.3'
   gem 'rspec-rails', '3.3.3'
   gem 'factory_girl' 
+
+end
+
+group :production do
+
+  gem 'rails_12factor', '0.0.2'
+  gem 'pg',             '0.18.4'
+
 end

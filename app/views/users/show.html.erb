@@ -1,27 +1,35 @@
 <div class="col-md-6" id="center_table">
 	<%= @user.email %>
-	<h4 style="margin-top: 1em;">Системы:</h4>
-	<ul class="list-group">
-		  <% @systems.each do |i| %>
-		    <li class="list-group-item">
-		    	<%= i.name %>
-		    	<div class="btn-group btn-group-justified" role="group" aria-label="..." style="margin-top: 1em;">
-					  <div class="btn-group" role="group">
-					    <%= link_to "Подробнее", system_path(i), :class => "btn btn-default"%>
-					  </div>
-					  <% if user_signed_in? && i.owner_id == current_user.id %>
+	<% if @user.systems.count > 0 %>
+		<h4 style="margin-top: 1em;">Системы:</h4>
+		<ul class="list-group">
+			  <% @systems.each do |i| %>
+			    <li class="list-group-item">
+			    	<%= i.name %>
+			    	<div class="btn-group btn-group-justified" role="group" aria-label="..." style="margin-top: 1em;">
 						  <div class="btn-group" role="group">
-						    <%=link_to "Удалить", system_path(i), :class => "btn btn-default", method: :delete, data: {confirm: "Точно удалить?"} %>
+						    <%= link_to "Подробнее", system_path(i), :class => "btn btn-default"%>
 						  </div>
-						  <div class="btn-group" role="group">
-				    		<%=link_to "Изменить", edit_system_path(i), :class => "btn btn-default" %>
-				  		</div>
-					  <%end%>
-					</div>
-		    </li>
-		  <% end %>	
-	</ul>
-	<% if @user.systems.count == 0 %>
-		<h4>Пользователь не учавствует в разработке систем</h4>
+						  <% if user_signed_in? && i.owner_id == current_user.id %>
+							  <div class="btn-group" role="group">
+							    <%=link_to "Удалить", system_path(i), :class => "btn btn-default", method: :delete, data: {confirm: "Точно удалить?"} %>
+							  </div>
+							  <div class="btn-group" role="group">
+					    		<%=link_to "Изменить", edit_system_path(i), :class => "btn btn-default" %>
+					  		</div>
+						  <% else %>
+						  	<%if @user == current_user%>
+						  		<%=link_to "Покинуть", leave_system_path(i), :class => "btn btn-default", method: :delete, data: {confirm: "Точно покинуть?"} %>
+						  	<% end %>
+						  <%end%>
+						</div>
+			    </li>
+			  <% end %>	
+		</ul>
+	<% else %>
+		<h4>Нет систем в разработке</h4>
+	<% end %>
+	<%if @user == current_user %>
+		<%= link_to "Создать систему", new_system_path, :class => "btn btn-default", method: :get %>
 	<% end %>
 </div>

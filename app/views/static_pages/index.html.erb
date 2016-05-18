@@ -1,0 +1,12 @@
+<div class="col-md-6" style=" float: none;
+    margin: 0 auto;">
+	<div class="list-group">
+		<h3>Разробатываемые системы:</h3>
+		<%@systems.each do |s|%>
+		  <a href="/systems/<%= s.id %>" class="list-group-item" style="margin-top: 1em;" >
+		    <h4 class="list-group-item-heading"><%= s.name%></h4>
+		    <p class="list-group-item-text"><%= s.details%></p>
+		  </a>
+		<% end %>
+	</div>
+</div>

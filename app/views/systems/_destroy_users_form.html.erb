@@ -1,15 +1,15 @@
 	<ul class="list-group">
-	<%= form_tag destroy_users_system_path, method: :post do %>
-	  <% @users.each do |user| %>
-	      <li class="list-group-item">
-	        <%= check_box_tag "user_ids[]", user.id -%>
-	        <%= h user.email -%>
-	      </li>
-	  <% end %>
-	 <li style="list-style:none; margin-top:1em;">
-		<%= form_for destroy_users_system_path, method: :delete do |f|%>
-  		<%= submit_tag 'Удалить', :class => "btn btn-default" %>
-		<% end %>
-	 </li>
-	</ul>
+		<%= form_tag destroy_users_system_path, method: :post do %>
+		  <% @users.each do |user| %>
+		      <li class="list-group-item">
+		        <%= check_box_tag "user_ids[]", user.id -%>
+		        <%= h user.email -%>
+		      </li>
+		  <% end %>
+		 <li style="list-style:none; margin-top:1em;">
+			<%= form_for destroy_users_system_path, method: :delete do |f|%>
+	  		<%= submit_tag 'Удалить', :class => "btn btn-default" %>
+			<% end %>
+		 </li>
+		</ul>
 	<% end %>

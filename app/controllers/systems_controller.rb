@@ -1,7 +1,10 @@
 class SystemsController < ApplicationController
 
+
 	before_filter :load_user
-	before_filter :load_system, only:[:destroy,:add_users,:add_users_form,
+	before_filter :signed_in, only:[:index,:leave,:destroy,:add_users,:add_users_form,:edit,:update,:destroy_users,:new,:create]
+	before_filter :check_if_admin, only:[:index]
+	before_filter :load_system, only:[:leave,:destroy,:add_users,:add_users_form,
 		:show,:edit,:update,:destroy_users]
 	before_filter :check_owner, only:[:edit,:update,:destroy,
 		:add_users_form,:add_users,:destroy_users]
@@ -75,6 +78,15 @@ class SystemsController < ApplicationController
 		redirect_to system_path(@system)
 	end
 
+	def leave
+		if (  @system.users.include?(@user) && @system.owner_id != @user.id )
+			@system.users.destroy(@user)
+			redirect_to user_path(@user)
+		else
+			render_403
+		end
+	end
+
 
 private 
 
@@ -91,7 +103,7 @@ private
 	end
 
 	def check_owner
-		render_403 unless user_signed_in? && @system.owner_id == current_user.id
+		render_403 unless @system.owner_id == current_user.id || current_user.admin?
 	end
 
 end

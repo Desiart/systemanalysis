@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'developer' => 'static_pages#developer'
 
   devise_for :users
+
   resources :users, only: [:index, :show, :destroy]
 
   resources :system_types, only: [:new, :create]
@@ -14,6 +15,7 @@ Rails.application.routes.draw do
       get 'add_users_form'
       post 'add_users'
       delete 'destroy_users'
+      delete 'leave'
     end
   end
 

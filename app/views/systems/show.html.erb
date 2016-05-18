@@ -23,9 +23,7 @@
 		<%if user_signed_in? && current_user.id == @system.owner_id %>
 				<%= link_to "Добавить еще", add_users_form_system_path, :class => "btn btn-default", method: :get %>
 				<h5>Удалить участников:</h5>
-					<div class="col-md-6" >
 						<%= render partial: "destroy_users_form" %>
-					</div>
 		<% end %>
 	<% else %>
 		<h2>Участников нет</h2>

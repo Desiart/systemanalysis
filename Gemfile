@@ -14,6 +14,7 @@ gem 'carrierwave'
 gem 'rmagick'
 gem 'bcrypt'
 gem 'devise'
+gem 'bootsy',                '2.2.1'
 gem 'anjlab-bootstrap-rails', '~> 3.0.0.3', :require => 'bootstrap-rails'
 gem 'sdoc',                 '0.4.0', group: :doc
 

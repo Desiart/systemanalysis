@@ -15,6 +15,8 @@
 //= require turbolinks
 //= require_tree .
 //= require bootstrap-sprockets
+//= require bootstrap
+//= require bootsy
 
 #sign_in_menu
 {

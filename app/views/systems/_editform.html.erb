@@ -1,0 +1,9 @@
+<div class="col-md-3" id="system_form">
+	<p><%= f.input :name %></p>
+	<p><%= f.input :description%></p>
+	<p><%= f.input :details, as: :text %></p>
+	<p><%= f.input :system_type, :collection => SystemType.all, :value_method => :id,  include_blank: false, :selected => @system.system_type.id  %></p>
+	<p><%= f.submit %>  </p>
+</div>
+
+

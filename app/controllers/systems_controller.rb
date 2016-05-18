@@ -1,7 +1,8 @@
 class SystemsController < ApplicationController
 
 	before_filter :load_user
-	before_filter :load_system, only:[:destroy,:add_users,:add_users_form,:show,:edit,:update,:destroy_users]
+	before_filter :load_system, only:[:destroy,:add_users,:add_users_form,
+		:show,:edit,:update,:destroy_users]
 	before_filter :check_owner, only:[:edit,:update,:destroy,
 		:add_users_form,:add_users,:destroy_users]
 
@@ -25,6 +26,7 @@ class SystemsController < ApplicationController
 	def create
 		@system = System.create(system_params)
 		@system.owner_id = @user.id
+		@system.system_type = SystemType.find_by_id(params[:system][:system_type])
 		@system.save
 		@user.system_lists.create(system: @system)
 		redirect_to system_path(@system)
@@ -34,6 +36,10 @@ class SystemsController < ApplicationController
 	end
 
 	def update
+		@system.update(system_params)
+		@system.system_type = SystemType.find_by_id(params[:system][:system_type])
+		@system.save
+		redirect_to system_path(@system)
 	end
 
 	def destroy
@@ -85,7 +91,7 @@ private
 	end
 
 	def check_owner
-		render_403 unless @system.owner_id == current_user.id
+		render_403 unless user_signed_in? && @system.owner_id == current_user.id
 	end
 
 end

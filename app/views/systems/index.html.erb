@@ -7,16 +7,21 @@
 				  <div class="btn-group" role="group">
 				    <%= link_to "Подробнее", system_path(i), :class => "btn btn-default"%>
 				  </div>
-				  <%if i.owner_id == current_user.id %>
+				  <%if user_signed_in? && i.owner_id == current_user.id %>
 				  	<div class="btn-group" role="group">
 				    	<%=link_to "Удалить", system_path(i), :class => "btn btn-default", method: :delete, data: {confirm: "Точно удалить?"} %>
-				    </div>
-				  <%end%>				  
+				  	</div>
+				  	<div class="btn-group" role="group">
+				    	<%=link_to "Изменить", edit_system_path(i), :class => "btn btn-default" %>
+				  	</div>
+				  <% end %>
 				</div>
 	    </li>
 	  <% end %>
 	</ul>
-	<div>
-		 <%= link_to "Создать систему", new_system_path, :class => "btn btn-default"%>
-	</div>
+	<% if user_signed_in? %>
+		<div>
+			 <%= link_to "Создать систему", new_system_path, :class => "btn btn-default"%>
+		</div>
+	<% end %>
 </div>

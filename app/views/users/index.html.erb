@@ -5,10 +5,10 @@
 	    	<%= i.email %>
 	    	<div class="btn-group btn-group-justified" role="group" aria-label="...">
 				  <div class="btn-group" role="group">
-				    <%= link_to "Профиль", user_path(i), :class => "btn btn-default"%>
+				    <%= link_to "Профиль", user_path(i), :class => "btn btn-default" %>
 				  </div>
 				  <div class="btn-group" role="group">
-				    <%=link_to "Удалить", user_path(i), :class => "btn btn-default", method: :delete, data: {confirm: "Точно удалить?"} %>
+				    <%= link_to "Удалить", user_path(i), :class => "btn btn-default", method: :delete, data: {confirm: "Точно удалить?"} %>
 				  </div>
 				</div>
 	    </li>

@@ -4,6 +4,8 @@
 		<li class="list-group-item" style="margin-top: 1em;"><%= User.find_by_id(@system.owner_id).email %></li>
 		<h4 style="margin-top: 1em;">Название:</h4>
 		<li class="list-group-item" style="margin-top: 1em;"><%= @system.name %></li>
+		<h4 style="margin-top: 1em;">Тип Системы:</h4>
+		<li class="list-group-item" style="margin-top: 1em;"><%= @system.system_type.name %></li>
 		<h4 style="margin-top: 1em;">Назначение:</h4>
 		<li class="list-group-item" style="margin-top: 1em;"><%= @system.description %></li>
 		<h4 style="margin-top: 1em;">Описание:</h4>
@@ -12,25 +14,31 @@
 	<h5>Участники:</h5>
 	<%if @users.count > 0 %>
 		<ul class="list-group">
-		  <% @users.each do |user| %>
-		      <li class="list-group-item">
-		        <%=user.email%>
-		      </li>
-		  <% end %>
+			<% @users.each do |user| %>
+			    <li class="list-group-item">
+			      <%= user.email %>
+			    </li>
+			<% end %>  
 		</ul>
-		<%if current_user.id == @system.owner_id%>
-			<%=link_to "Добавить еще", add_users_form_system_path, :class => "btn btn-default", method: :get%>
-			<%if current_user.id == @system.owner_id %>
-			<h5>Удалить участников:</h5>
+		<%if user_signed_in? && current_user.id == @system.owner_id %>
+				<%= link_to "Добавить еще", add_users_form_system_path, :class => "btn btn-default", method: :get %>
+				<h5>Удалить участников:</h5>
 					<div class="col-md-6" >
-						<%= render partial: "destroy_users_form"%>
+						<%= render partial: "destroy_users_form" %>
 					</div>
+		<% end %>
+	<% else %>
+		<h2>Участников нет</h2>
+			<% if user_signed_in? && current_user.id == @system.owner_id %>
+				<%= link_to "Добавить", add_users_form_system_path, :class => "btn btn-default", method: :get %>
 			<% end %>
 	<% end %>
-	<% else %>
-		<p>Участников нет</p>
-		<%if current_user.id == @system.owner_id%>
-			<%=link_to "Добавить", add_users_form_system_path, :class => "btn btn-default", method: :get%>
-		<% end %>
+	<% if user_signed_in? && current_user.id == @system.owner_id %>
+		<div style="margin-top: 1em;">
+		<%=link_to "Редактировать систему", edit_system_path(@system), :class => "btn btn-default" %>
+		</div>
+		<div style="margin-top: 1em;">
+				<%=link_to "Удалить", system_path(@system), :class => "btn btn-default", method: :delete, data: {confirm: "Точно удалить?"} %>
+		</div>
 	<% end %>
 </div>

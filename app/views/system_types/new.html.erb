@@ -1,0 +1,6 @@
+<div class="col-md-3" id="system_form">
+	<%= simple_form_for @system_type, :html => {:multipart => true} do |f| %>
+		<p><%= f.input :name %></p>
+		<p><%= f.submit %> </p>
+	<%end%>
+</div>

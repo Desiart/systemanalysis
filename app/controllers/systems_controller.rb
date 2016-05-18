@@ -47,7 +47,7 @@ class SystemsController < ApplicationController
 
 	def destroy
 		@system.destroy
-		redirect_to systems_path
+		redirect_to user_path(@user)
 	end
 
 	def add_users_form

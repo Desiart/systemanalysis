@@ -17,11 +17,3 @@
 //= require bootstrap-sprockets
 //= require bootstrap
 //= require bootsy
-
-#sign_in_menu
-{
-  width:250% !important;
-  max-width: 300px;
-  li{
-      margin: 1em;
- }

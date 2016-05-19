@@ -1,0 +1,6 @@
+<div class="col-md-3">
+	<%= simple_form_for [@system,@task], :html => {:multipart => true} do |f| %>
+		<p><%= f.input :name %></p>
+		<p><%= f.submit %></p>
+	<%end%>
+</div>

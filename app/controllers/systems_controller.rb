@@ -20,6 +20,7 @@ class SystemsController < ApplicationController
 				@users << user
 			end
 		end
+		@tasks = @system.tasks
 	end
 
 	def new

@@ -11,12 +11,15 @@ Rails.application.routes.draw do
   resources :system_types, only: [:new, :create]
 
   resources :systems do
+
     member do
       get 'add_users_form'
       post 'add_users'
       delete 'destroy_users'
       delete 'leave'
     end
+
+    resources :tasks, only: [:new,:create]
   end
 
   

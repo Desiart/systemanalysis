@@ -48,5 +48,22 @@
 <div class="col-md-6" style="align-left;">
 <div class="well">
 	<h4>Задачи</h4>
+	<ul class="list-group">
+	<%if @tasks.count > 0 %>
+			<% @tasks.each do |task| %>
+			    <li class="list-group-item">
+			      <%= task.name %>
+			    </li>
+			<% end %>  
+		</ul>
+		<%if user_signed_in? && current_user.id == @system.owner_id %>
+				<%= link_to "Добавить", new_system_task_path(@system), :class => "btn btn-default", method: :get %>
+		<% end %>
+	<% else %>
+		<h4>Задач нет</h4>
+			<% if user_signed_in? && current_user.id == @system.owner_id %>
+				<%= link_to "Добавить", new_system_task_path(@system), :class => "btn btn-default", method: :get %>
+			<% end %>
+	<% end %>
 </div>
 </div>

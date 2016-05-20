@@ -20,18 +20,17 @@
 							</div>
 					</div>
 				  </li>
-				<% else %>
-					<li class="list-group-item">
+					<% else %>
+						<li class="list-group-item">
 						  <%= i.name %>
 						  <div class="btn-group btn-group-justified" role="group" aria-label="...">
 								<div class="btn-group" role="group">
 									<%= link_to "Подробнее", system_path(i), :class => "btn btn-default"%>
 								</div>
-									<%if @user == current_user%>
-									  <%=link_to "Покинуть", leave_system_path(i), :class => "btn btn-default", method: :delete, data: {confirm: "Точно покинуть?"} %>
-									<%end%>
+								<%if @user == current_user%>
+									<%=link_to "Покинуть", leave_system_path(i), :class => "btn btn-default", method: :delete, data: {confirm: "Точно покинуть?"} %>
+								<%end%>
 							</div>
-						</div>
 						</li>
 				<% end %>	
 			<% end %>

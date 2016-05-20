@@ -2,12 +2,12 @@ class SystemsController < ApplicationController
 
 
 	before_filter :load_user
-	before_filter :signed_in, only:[:index,:leave,:destroy,:add_users,:add_users_form,:edit,:update,:destroy_users,:new,:create]
+	before_filter :signed_in, only:[:destroy_tasks,:index,:leave,:destroy,:add_users,:add_users_form,:edit,:update,:destroy_users,:new,:create]
 	before_filter :check_if_admin, only:[:index]
-	before_filter :load_system, only:[:leave,:destroy,:add_users,:add_users_form,
+	before_filter :load_system, only:[:destroy_tasks,:leave,:destroy,:add_users,:add_users_form,
 		:show,:edit,:update,:destroy_users]
 	before_filter :check_owner, only:[:edit,:update,:destroy,
-		:add_users_form,:add_users,:destroy_users]
+		:add_users_form,:add_users,:destroy_users,:destroy_tasks]
 
 	def index
 		@systems = System.all
@@ -75,6 +75,15 @@ class SystemsController < ApplicationController
 		ids.each do |i|
 			user = User.find_by_id(i)
 			@system.users.destroy(user)
+		end
+		redirect_to system_path(@system)
+	end
+
+	def destroy_tasks
+		ids = params[:task_ids]
+		ids.each do |i|
+			task = Task.find_by_id(i)
+			@system.tasks.destroy(task)
 		end
 		redirect_to system_path(@system)
 	end

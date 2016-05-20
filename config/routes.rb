@@ -17,9 +17,10 @@ Rails.application.routes.draw do
       post 'add_users'
       delete 'destroy_users'
       delete 'leave'
+      delete 'destroy_tasks'
     end
 
-    resources :tasks, only: [:new,:create]
+    resources :tasks, only: [:new,:create,:show]
   end
 
   

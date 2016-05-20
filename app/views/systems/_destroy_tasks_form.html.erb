@@ -1,0 +1,15 @@
+	<ul class="list-group">
+		<%= form_tag destroy_tasks_system_path, method: :post do %>
+		  <% @system.tasks.each do |task| %>
+		      <li class="list-group-item">
+		        <%= check_box_tag "task_ids[]", task.id -%>
+		        <%= h task.name -%>
+		      </li>
+		  <% end %>
+		 <li style="list-style:none; margin-top:1em;">
+			<%= form_for destroy_tasks_system_path, method: :delete do |f|%>
+	  		<%= submit_tag 'Удалить', :class => "btn btn-default" %>
+			<% end %>
+		 </li>
+		</ul>
+	<% end %>

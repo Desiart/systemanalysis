@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
 
-	before_filter :load_system, only: [:new,:create]
+	before_filter :load_system, only: [:new,:create,:show]
 
 	def new
 		@task = @system.tasks.build
@@ -12,6 +12,10 @@ class TasksController < ApplicationController
 		redirect_to system_path(@system)
 	end
 
+	def show
+		@task = Task.find_by_id(params[:id])
+	end
+
 	private 
 
 	def load_system
@@ -19,7 +23,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-		params.require(:task).permit(:name)
+		params.require(:task).permit(:name, :description)
 	end
 
 end

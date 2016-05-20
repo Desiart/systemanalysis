@@ -1,6 +1,7 @@
 <div class="col-md-3" id="system_form">
 	<%= simple_form_for @system_type, :html => {:multipart => true} do |f| %>
-		<p><%= f.input :name %></p>
-		<p><%= f.submit %> </p>
+		<p><h4>Название</h4><p>
+		<p><%= f.input :name, label: false%></p>
+		<p><%= f.button :submit, 'Создать', html: { class: 'btn btn-default' } %></p>
 	<%end%>
 </div>

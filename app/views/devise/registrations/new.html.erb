@@ -1,0 +1,16 @@
+<div class="col-md-6">
+	<ul style="list-style-type: none;">
+		<li><h2>Регистрация</h2></li>
+		<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+				<li><%= f.error_notification %></li>		
+				<li style="margin-top: 1em;"><h4>Почта</h4></li>		 
+				<li><%= f.input :email, autofocus: true, label: false%></li>
+				<li style="margin-top: 1em;"><h4>Пароль</h4></li>	
+				<li><%= f.input :password, label: false%></li>
+				<li style="margin-top: 1em;"><h4>Подтверждение</h4></li>	
+				<li><%= f.input :password_confirmation, label: false%></li>			 
+				<li style="margin-top: 1em;"><%= f.button :submit, "Регистрация" %></li>				
+		<% end %>
+	</ul>
+</div>
+

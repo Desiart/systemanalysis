@@ -1,0 +1,13 @@
+<div class="col-md-6">
+	<ul style="list-style-type: none;">
+		<li><h2>Регистрация</h2></li>
+				<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+					<li style="margin-top: 1em;"><h4>Почта</h4></li>		 
+				  <li><%= f.input :email, required: false, autofocus: true, label: false %></li>
+				  <li style="margin-top: 1em;"><h4>Пароль</h4></li>	
+				  <li><%= f.input :password, required: false, label: false %></li>
+				  <li style="margin-left: 2em;"><%= f.input :remember_me, as: :boolean, label: "Запомнить меня" if devise_mapping.rememberable? %></li>
+				  <li><%= f.button :submit, "Войти" %></li>
+				<% end %>
+	</ul>
+</div>

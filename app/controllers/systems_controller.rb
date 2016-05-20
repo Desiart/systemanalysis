@@ -63,27 +63,31 @@ class SystemsController < ApplicationController
 
 	def add_users
 		ids = params[:user_ids]
-		ids.each do |i|
-			user = User.find_by_id(i)
-			@system.users << user
-		end
+			ids.each do |i|
+				user = User.find_by_id(i)
+				@system.users << user
+			end
 		redirect_to system_path(@system)
 	end
 
 	def destroy_users
 		ids = params[:user_ids]
-		ids.each do |i|
-			user = User.find_by_id(i)
-			@system.users.destroy(user)
+		if ids != nil
+			ids.each do |i|
+				user = User.find_by_id(i)
+				@system.users.destroy(user)
+			end
 		end
 		redirect_to system_path(@system)
 	end
 
 	def destroy_tasks
 		ids = params[:task_ids]
-		ids.each do |i|
-			task = Task.find_by_id(i)
-			@system.tasks.destroy(task)
+		if ids != nil
+			ids.each do |i|
+				task = Task.find_by_id(i)
+				@system.tasks.destroy(task)
+			end
 		end
 		redirect_to system_path(@system)
 	end

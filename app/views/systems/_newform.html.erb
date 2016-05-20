@@ -7,7 +7,7 @@
 	<p><%= f.input :details, as: :text, label: false %></p>
 	<p><h4>Тип</h4><p>
 	<p><%= f.input :system_type, :collection => SystemType.all, :value_method => :id,  include_blank: false, label: false%></p>
-	<p><%= f.button :submit, 'Создать' html: { class: 'btn btn-default' } %>  </p>
+	<p><%= f.button :submit, 'Создать', html: { class: 'btn btn-default' } %>  </p>
 </div>
 
 

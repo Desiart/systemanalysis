@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     end
 
     resources :tasks, only: [:new,:create,:show]
+
   end
 
   

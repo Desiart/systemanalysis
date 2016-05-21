@@ -63,10 +63,12 @@ class SystemsController < ApplicationController
 
 	def add_users
 		ids = params[:user_ids]
+		if ids != nil
 			ids.each do |i|
 				user = User.find_by_id(i)
 				@system.users << user
 			end
+		end
 		redirect_to system_path(@system)
 	end
 
